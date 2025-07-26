@@ -22,7 +22,7 @@ export default {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>X Media Bot</title>
+        <title>X 媒体机器人</title>
         <style>
           body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
           code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
@@ -31,14 +31,14 @@ export default {
         </style>
       </head>
       <body>
-        <h1>🤖 X Media Bot</h1>
-        <p>Bot is running!</p>
-        <p>Time: ${new Date().toISOString()}</p>
-        <p>BOT_TOKEN configured: ${env.BOT_TOKEN ? 'YES' : 'NO'}</p>
+        <h1>🤖 X 媒体机器人</h1>
+        <p>机器人运行中！</p>
+        <p>时间: ${new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}</p>
+        <p>BOT_TOKEN 配置状态: ${env.BOT_TOKEN ? '已配置' : '未配置'}</p>
         
-        <h2>🔧 Setup</h2>
+        <h2>🔧 设置</h2>
         ${env.BOT_TOKEN ? `
-          <p>Webhook URL: <code>${workerUrl}/webhook</code></p>
+          <p>Webhook 地址: <code>${workerUrl}/webhook</code></p>
           <p><a href="/setup-webhook" class="btn">🚀 设置 Webhook</a></p>
         ` : `
           <p>请先配置 BOT_TOKEN: <code>wrangler secret put BOT_TOKEN</code></p>
@@ -66,7 +66,7 @@ async function handleTelegramWebhook(request, env) {
 
       // 处理 /start 命令
       if (messageText === '/start') {
-        await sendMessage(chatId, '🤖 X Media Bot 已启动！\n\n发送包含 Twitter/X 链接的消息，我会帮你提取视频和图片。\n\n支持的链接格式：\n• https://twitter.com/username/status/123\n• https://x.com/username/status/123', env);
+        await sendMessage(chatId, '🤖 X 媒体机器人已启动！\n\n发送包含 Twitter/X 链接的消息，我会帮你提取视频和图片。\n\n支持的链接格式：\n• https://twitter.com/username/status/123\n• https://x.com/username/status/123', env);
         return new Response('OK', { status: 200 });
       }
 
@@ -75,14 +75,14 @@ async function handleTelegramWebhook(request, env) {
 
       if (twitterUrls.length > 0) {
         console.log('Found Twitter URLs:', twitterUrls);
-        await sendMessage(chatId, '🔍 检测到 Twitter 链接，正在处理...', env);
+        await sendMessage(chatId, '🔍 检测到 Twitter/X 链接，正在处理...', env);
 
         for (const twitterUrl of twitterUrls) {
           await processTwitterUrl(twitterUrl, chatId, env);
         }
       } else {
         // 如果没有找到 Twitter 链接，给出提示
-        await sendMessage(chatId, '❌ 未检测到 Twitter/X 链接。\n\n请发送包含以下格式的链接：\n• https://twitter.com/username/status/123\n• https://x.com/username/status/123', env);
+        await sendMessage(chatId, '❌ 未检测到 Twitter/X 链接。\n\n请发送包含以下格式的链接：\n• https://twitter.com/用户名/status/123\n• https://x.com/用户名/status/123', env);
       }
     }
 
@@ -105,7 +105,7 @@ async function processTwitterUrl(originalUrl, chatId, env) {
     // 从原始 URL 提取用户名和状态 ID
     const urlMatch = originalUrl.match(/https?:\/\/(?:twitter\.com|x\.com)\/(\w+)\/status\/(\d+)/);
     if (!urlMatch) {
-      await sendMessage(chatId, '无法解析 Twitter 链接', env);
+      await sendMessage(chatId, '❌ 无法解析 Twitter/X 链接', env);
       return;
     }
 
@@ -122,7 +122,7 @@ async function processTwitterUrl(originalUrl, chatId, env) {
     // 如果 fxtwitter 失败，尝试 vxtwitter（仅最高画质）
     if (!mediaData) {
       console.log(`Fetching from vxtwitter: ${username}/${statusId}`);
-      await sendMessage(chatId, '🔄 尝试 vxtwitter API（最高画质）...', env);
+      await sendMessage(chatId, '🔄 尝试备用 API（最高画质）...', env);
       mediaData = await fetchFromVxTwitter(username, statusId);
       console.log('VxTwitter result:', mediaData ? 'SUCCESS' : 'FAILED');
     }
@@ -622,9 +622,9 @@ async function setupWebhook(request, env) {
           <title>配置错误</title>
         </head>
         <body>
-          <h1>❌ BOT_TOKEN 未配置</h1>
-          <p>请运行: <code>wrangler secret put BOT_TOKEN</code></p>
-          <a href="/">返回</a>
+          <h1>❌ 机器人令牌未配置</h1>
+          <p>请运行命令: <code>wrangler secret put BOT_TOKEN</code></p>
+          <a href="/">返回首页</a>
         </body>
         </html>
       `, {
@@ -658,9 +658,9 @@ async function setupWebhook(request, env) {
         </head>
         <body>
           <h1>✅ Webhook 设置成功！</h1>
-          <p>Webhook URL: <code>${webhookUrl}</code></p>
+          <p>Webhook 地址: <code>${webhookUrl}</code></p>
           <p>现在可以在 Telegram 中测试机器人了</p>
-          <a href="/">返回</a>
+          <a href="/">返回首页</a>
         </body>
         </html>
       `, {
@@ -676,8 +676,8 @@ async function setupWebhook(request, env) {
         </head>
         <body>
           <h1>❌ Webhook 设置失败</h1>
-          <p>错误: ${result.description}</p>
-          <a href="/">返回</a>
+          <p>错误信息: ${result.description}</p>
+          <a href="/">返回首页</a>
         </body>
         </html>
       `, {
@@ -695,8 +695,8 @@ async function setupWebhook(request, env) {
       </head>
       <body>
         <h1>❌ 设置过程中出错</h1>
-        <p>错误: ${error.message}</p>
-        <a href="/">返回</a>
+        <p>错误信息: ${error.message}</p>
+        <a href="/">返回首页</a>
       </body>
       </html>
     `, {
