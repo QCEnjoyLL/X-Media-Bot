@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // 部署辅助脚本 - 显示部署说明
-console.log('🤖 Twitter Video Bot 部署指南\n');
+console.log('🤖 X Media Bot 部署指南\n');
 
 console.log('📋 部署步骤:');
 console.log('1. 创建 Telegram Bot:');

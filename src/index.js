@@ -1,4 +1,4 @@
-// Twitter Video Bot for Telegram
+// X Media Bot for Telegram
 // 使用 fxtwitter 和 vxtwitter API 提取视频和图片
 
 export default {
@@ -22,7 +22,7 @@ export default {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Twitter Video Bot</title>
+        <title>X Media Bot</title>
         <style>
           body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
           code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
@@ -31,7 +31,7 @@ export default {
         </style>
       </head>
       <body>
-        <h1>🤖 Twitter Video Bot</h1>
+        <h1>🤖 X Media Bot</h1>
         <p>Bot is running!</p>
         <p>Time: ${new Date().toISOString()}</p>
         <p>BOT_TOKEN configured: ${env.BOT_TOKEN ? 'YES' : 'NO'}</p>
@@ -66,7 +66,7 @@ async function handleTelegramWebhook(request, env) {
 
       // 处理 /start 命令
       if (messageText === '/start') {
-        await sendMessage(chatId, '🤖 Twitter Video Bot 已启动！\n\n发送包含 Twitter/X 链接的消息，我会帮你提取视频和图片。\n\n支持的链接格式：\n• https://twitter.com/username/status/123\n• https://x.com/username/status/123', env);
+        await sendMessage(chatId, '🤖 X Media Bot 已启动！\n\n发送包含 Twitter/X 链接的消息，我会帮你提取视频和图片。\n\n支持的链接格式：\n• https://twitter.com/username/status/123\n• https://x.com/username/status/123', env);
         return new Response('OK', { status: 200 });
       }
 

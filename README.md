@@ -1,4 +1,4 @@
-# Twitter Video Bot
+# X Media Bot
 
 一个运行在 Cloudflare Workers 上的 Telegram 机器人，用于提取 Twitter/X 上的视频和图片。
 
@@ -25,7 +25,7 @@
 ```bash
 # 克隆项目
 git clone <your-repo-url>
-cd twitter-video-bot
+cd x-media-bot
 
 # 安装依赖
 npm install

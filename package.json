@@ -1,20 +1,20 @@
 {
-  "name": "twitter-video-bot",
+  "name": "x-media-bot",
   "version": "1.0.0",
   "type": "module",
-  "description": "Telegram bot for extracting Twitter/X videos using Cloudflare Workers",
+  "description": "Telegram bot for extracting Twitter/X media (videos and images) using Cloudflare Workers",
   "main": "src/index.js",
-  "keywords": ["telegram", "bot", "twitter", "video", "cloudflare", "workers"],
+  "keywords": ["telegram", "bot", "twitter", "x", "media", "video", "image", "cloudflare", "workers"],
   "author": "Your Name",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/twitter-video-bot.git"
+    "url": "git+https://github.com/yourusername/x-media-bot.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/twitter-video-bot/issues"
+    "url": "https://github.com/yourusername/x-media-bot/issues"
   },
-  "homepage": "https://github.com/yourusername/twitter-video-bot#readme",
+  "homepage": "https://github.com/yourusername/x-media-bot#readme",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
