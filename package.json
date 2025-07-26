@@ -1,0 +1,35 @@
+{
+  "name": "twitter-video-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Telegram bot for extracting Twitter/X videos using Cloudflare Workers",
+  "main": "src/index.js",
+  "keywords": ["telegram", "bot", "twitter", "video", "cloudflare", "workers"],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/twitter-video-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/twitter-video-bot/issues"
+  },
+  "homepage": "https://github.com/yourusername/twitter-video-bot#readme",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "debug": "wrangler deploy --config wrangler-debug.toml",
+    "debug-dev": "wrangler dev --config wrangler-debug.toml",
+    "logs": "wrangler tail",
+    "diagnose": "node diagnose.js",
+    "test-apis": "node test-apis.js",
+    "setup": "node setup.js",
+    "test": "node test-bot.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.64.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
